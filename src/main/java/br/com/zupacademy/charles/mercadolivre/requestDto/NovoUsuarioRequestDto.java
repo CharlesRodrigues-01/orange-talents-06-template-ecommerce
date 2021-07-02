@@ -1,5 +1,7 @@
 package br.com.zupacademy.charles.mercadolivre.requestDto;
 
+import br.com.zupacademy.charles.mercadolivre.annotation.UniqueValue;
+import br.com.zupacademy.charles.mercadolivre.model.SenhaLimpa;
 import br.com.zupacademy.charles.mercadolivre.model.Usuario;
 
 import javax.validation.constraints.Email;
@@ -10,6 +12,7 @@ public class NovoUsuarioRequestDto {
 
     @NotBlank
     @Email
+    @UniqueValue(fieldName = "email", domainClass = Usuario.class)
     private String email;
     @NotBlank
     @Size(min = 6)
@@ -29,8 +32,6 @@ public class NovoUsuarioRequestDto {
     }
 
     public Usuario toModel() {
-
-        return new Usuario(email, senha);
-
+        return new Usuario(email, new SenhaLimpa(senha));
     }
 }

@@ -1,5 +1,8 @@
 package br.com.zupacademy.charles.mercadolivre.model;
 
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +24,13 @@ public class Usuario {
     @NotNull
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
-    public Usuario(@NotBlank String email, @NotBlank String senha) {
+    public Usuario(@NotBlank String email, @NotBlank SenhaLimpa senhaLimpa) {
+
+        Assert.isTrue(StringUtils.hasLength(email),"O email não pode estar em branco");
+        Assert.notNull(senhaLimpa,"O objeto do tipo senhaLimpa nao pode ser nulo");
+
         this.email = email;
-        this.senha = senha;
+        this.senha = senhaLimpa.hash();;
     }
 
     public Long getId() {
