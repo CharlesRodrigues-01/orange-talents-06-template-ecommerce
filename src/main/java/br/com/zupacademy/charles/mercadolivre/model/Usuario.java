@@ -24,6 +24,9 @@ public class Usuario {
     @NotNull
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
+    @Deprecated
+    public Usuario(){}
+
     public Usuario(@NotBlank String email, @NotBlank SenhaLimpa senhaLimpa) {
 
         Assert.isTrue(StringUtils.hasLength(email),"O email não pode estar em branco");
