@@ -34,4 +34,5 @@ public class NovoUsuarioRequestDto {
     public Usuario toModel() {
         return new Usuario(email, new SenhaLimpa(senha));
     }
+
 }

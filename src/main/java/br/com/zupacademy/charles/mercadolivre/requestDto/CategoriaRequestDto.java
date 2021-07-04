@@ -43,4 +43,7 @@ public class CategoriaRequestDto {
         return categoria;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
