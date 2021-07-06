@@ -11,10 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -45,6 +42,9 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
     private Set<Caracteristica> caracteristicas = new HashSet<>();
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<ImagensProduto> imagens = new HashSet<>();
 
     @Deprecated
     public Produto(){}
@@ -102,6 +102,8 @@ public class Produto {
         return caracteristicas;
     }
 
+    public Set<ImagensProduto> getImagens() { return imagens; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,5 +115,15 @@ public class Produto {
     @Override
     public int hashCode() {
         return Objects.hash(nome);
+    }
+
+    public void associaImagens(Set<String> links) {
+        Set<ImagensProduto> imagens = links.stream().map(link -> new ImagensProduto(this, link))
+                .collect(Collectors.toSet());
+        this.imagens.addAll(imagens);
+    }
+
+    public boolean pertenceAoUsuario(String emailLogado) {
+        return this.usuario.getEmail().equals(emailLogado);
     }
 }
