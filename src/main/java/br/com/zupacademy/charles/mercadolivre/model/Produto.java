@@ -49,6 +49,9 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
     private Set<Opiniao> opinioes = new HashSet<>();
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
+    private Set<Pergunta> perguntas = new HashSet<>();
+
     @Deprecated
     public Produto(){}
 
@@ -108,6 +111,8 @@ public class Produto {
     public Set<ImagensProduto> getImagens() { return imagens; }
 
     public Set<Opiniao> getOpinioes() { return opinioes; }
+
+    public Set<Pergunta> getPerguntas() { return perguntas; }
 
     @Override
     public boolean equals(Object o) {

@@ -1,8 +1,10 @@
 package br.com.zupacademy.charles.mercadolivre.controller;
 
-import br.com.zupacademy.charles.mercadolivre.model.*;
+import br.com.zupacademy.charles.mercadolivre.model.Produto;
+import br.com.zupacademy.charles.mercadolivre.model.UploaderFake;
+import br.com.zupacademy.charles.mercadolivre.model.Usuario;
+import br.com.zupacademy.charles.mercadolivre.model.UsuarioLogado;
 import br.com.zupacademy.charles.mercadolivre.repository.ProdutoRepository;
-import br.com.zupacademy.charles.mercadolivre.repository.UsuarioRepository;
 import br.com.zupacademy.charles.mercadolivre.requestDto.ImagensRequestDto;
 import br.com.zupacademy.charles.mercadolivre.requestDto.ProdutoRequestDto;
 import br.com.zupacademy.charles.mercadolivre.validation.ProibeCaracteristicasComMesmoNome;
@@ -17,7 +19,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Set;
 
 @RestController
