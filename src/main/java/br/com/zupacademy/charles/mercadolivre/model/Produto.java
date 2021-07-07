@@ -12,6 +12,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Entity
@@ -53,7 +54,8 @@ public class Produto {
     private Set<Pergunta> perguntas = new HashSet<>();
 
     @Deprecated
-    public Produto(){}
+    public Produto() {
+    }
 
     public Produto(@NotBlank String nome, @NotNull Integer quantidade, @NotBlank String descricao,
                    @NotNull BigDecimal valor, @NotNull Categoria categoria, @Valid Usuario usuario,
@@ -108,11 +110,17 @@ public class Produto {
         return caracteristicas;
     }
 
-    public Set<ImagensProduto> getImagens() { return imagens; }
+    public Set<ImagensProduto> getImagens() {
+        return imagens;
+    }
 
-    public Set<Opiniao> getOpinioes() { return opinioes; }
+    public Opinioes getOpinioes() {
+        return new Opinioes(this.opinioes);
+    }
 
-    public Set<Pergunta> getPerguntas() { return perguntas; }
+    public Set<Pergunta> getPerguntas() {
+        return perguntas;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -136,4 +144,17 @@ public class Produto {
     public boolean pertenceAoUsuario(String emailLogado) {
         return this.usuario.getEmail().equals(emailLogado);
     }
+
+    public <T> Set<T> mapeiaCaracteristicas(Function<Caracteristica, T> funcaoMapeadora) {
+        return this.caracteristicas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public <T> Set<T> mapeiaImagens(Function<ImagensProduto, T> funcaoMapeadora) {
+        return this.imagens.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public <T> Set<T> mapeiaPerguntas(Function<Pergunta, T> funcaoMapeadora) {
+        return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
 }

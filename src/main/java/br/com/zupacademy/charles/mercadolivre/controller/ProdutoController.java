@@ -44,7 +44,7 @@ public class ProdutoController {
     @PostMapping
     @Transactional
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid ProdutoRequestDto requestDto,
-                                          @AuthenticationPrincipal UsuarioLogado usuarioLogado){
+                                          @AuthenticationPrincipal UsuarioLogado usuarioLogado) {
 
         Usuario usuario = usuarioLogado.get();
         Produto produto = requestDto.toModel(manager, usuario);
@@ -56,7 +56,7 @@ public class ProdutoController {
     @PostMapping("/{id}/imagens")
     @Transactional
     public ResponseEntity<Void> adicionaImagem(@PathVariable("id") Long id, @Valid ImagensRequestDto requestDto,
-                                               @AuthenticationPrincipal UsuarioLogado usuarioLogado){
+                                               @AuthenticationPrincipal UsuarioLogado usuarioLogado) {
 
         Usuario usuario = usuarioLogado.get();
         Produto produto = manager.find(Produto.class, id);
@@ -71,5 +71,4 @@ public class ProdutoController {
         manager.merge(produto);
         return ResponseEntity.ok().build();
     }
-
 }
