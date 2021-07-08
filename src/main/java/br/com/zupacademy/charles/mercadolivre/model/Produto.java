@@ -157,4 +157,13 @@ public class Produto {
         return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
     }
 
+    public boolean abateEstoque(@Positive Integer quantidade) {
+        Assert.isTrue(quantidade > 0, "Quantidade da compra deve ser maior que zero");
+
+        if (this.quantidade < quantidade) {
+            return false;
+        }
+        this.quantidade -= quantidade;
+        return true;
+    }
 }

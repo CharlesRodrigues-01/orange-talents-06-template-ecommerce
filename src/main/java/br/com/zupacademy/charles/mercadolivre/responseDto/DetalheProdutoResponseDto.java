@@ -10,7 +10,7 @@ import java.util.Set;
 public class DetalheProdutoResponseDto {
 
     private String nome;
-    private String descrcao;
+    private String descricao;
     private BigDecimal preco;
     private Set<DetalheProdutoCaracteristica> caracteristicas;
     private Set<String> linksImagens;
@@ -20,7 +20,7 @@ public class DetalheProdutoResponseDto {
     private Integer totalOpinioes;
 
     public DetalheProdutoResponseDto(Produto produto) {
-        this.descrcao = produto.getDescricao();
+        this.descricao = produto.getDescricao();
         this.nome = produto.getNome();
         this.preco = produto.getValor();
         this.caracteristicas = produto.mapeiaCaracteristicas(DetalheProdutoCaracteristica::new);
@@ -41,8 +41,8 @@ public class DetalheProdutoResponseDto {
         return nome;
     }
 
-    public String getDescrcao() {
-        return descrcao;
+    public String getDescricao() {
+        return descricao;
     }
 
     public BigDecimal getPreco() {
